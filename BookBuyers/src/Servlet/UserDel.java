@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Objects.User;
+import utils.DBManager;
+
 /**
  * Servlet implementation class UserDel
  */
@@ -34,6 +37,22 @@ public class UserDel extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String user = request.getParameter("username");
+		String password = request.getParameter("password");
+			
+		DBManager manager = new DBManager();
+		User u = new User(user, password, id);
+		db.connect(user, password);
+		
+		try {
+		String sql = "SELECT user, password";
+		manager.prepareStatement(sql);
+		
+		int row = statement.executeUpdate();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 }
